@@ -7,13 +7,16 @@ import ModuleRoutes from "./Kanbas/modules/routes.js";
 import AssignmentsRoutes from "./Kanbas/assignments/routes.js";
 import mongoose from "mongoose";
 import UserRoutes from "./Kanbas/users/routes.js";
+import QuizRoutes from "./Kanbas/quizzes/routes.js";
 import session from "express-session";
 import "dotenv/config";
 const CONNECTION_STRING =
-  process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas";
+  process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas-db";
 console.log(CONNECTION_STRING);
 console.log(process.env.FRONTEND_URL)
 mongoose.connect(CONNECTION_STRING);
+
+
 const app = express();
 app.use(
   cors({
@@ -40,6 +43,7 @@ app.use(session(sessionOptions));
 app.use(express.json());
 Hello(app);
 Lab5(app);
+QuizRoutes(app);
 CourseRoutes(app);
 ModuleRoutes(app);
 AssignmentsRoutes(app);

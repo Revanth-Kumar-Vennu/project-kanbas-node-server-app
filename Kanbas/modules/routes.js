@@ -16,10 +16,11 @@ function ModuleRoutes(app) {
     const newModule = {
       ...req.body,
       course: cid,
-      _id: new Date().getTime().toString(),
+      // _id: new Date().getTime().toString(),
     };
     try{
     const module_new = await dao.createModule(newModule);
+    console.log(module_new)
     res.send(module_new);
     }
     catch (error) {
