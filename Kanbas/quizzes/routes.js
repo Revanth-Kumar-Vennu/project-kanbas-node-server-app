@@ -1,16 +1,15 @@
 import * as dao from "./dao.js";
 export default function QuizRoutes(app) {
-    app.get("/api/courses/:cid/quizzes", async (req, res) => {
-        const { cid } = req.params;
-        try {
-          const quizzes = await dao.findQuizzesByCourseId(cid);
-          console.log(quizzes)
-          res.send(quizzes);
-        } catch (error) {
-          console.error(error);
-          res.status(500).send("Internal Server Error");
-        }
-      });
+  app.get("/api/courses/:cid/quizzes", async (req, res) => {
+    const { cid } = req.params;
+    try {
+      const quizzes = await dao.findQuizzesByCourseId(cid);
+      res.send(quizzes);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
 
   app.get("/api/quizzes/:id", async (req, res) => {
     try {
@@ -27,32 +26,22 @@ export default function QuizRoutes(app) {
     }
   });
 
-  
-
-
- 
-
   app.post("/api/courses/:cid/quizzes", async (req, res) => {
-     
     const { cid } = req.params;
 
     const newQuiz = {
-        ...req.body,
-        course: cid,
-      };
+      ...req.body,
+      course: cid,
+    };
 
-
-      try{
-        const new_quiz = await dao.createQuiz(newQuiz);
-        console.log(new_quiz)
-        res.send(new_quiz);
-        }
-        catch (error) {
-          console.error(error);
-          res.status(500).send("Internal Server Error");
-        }
-
-   
+    try {
+      const new_quiz = await dao.createQuiz(newQuiz);
+      console.log(new_quiz);
+      res.send(new_quiz);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
   });
 
   app.delete("/api/quizzes/:id", async (req, res) => {
@@ -78,6 +67,4 @@ export default function QuizRoutes(app) {
       res.status(500).send("Internal Server Error");
     }
   });
-
-
 }
