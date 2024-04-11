@@ -6,8 +6,9 @@ const quizzesSchema = new mongoose.Schema(
         required: true
       },
       course: {
-       type: String,
-       required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "courses",
+        required: true,
       },
       quizType: {
         type: String,
@@ -33,7 +34,7 @@ const quizzesSchema = new mongoose.Schema(
       availableDate: Date,
       untilDate: Date,
       isPublished: Boolean,
-      numberOfQuestions: Number
+      numberOfQuestions: Number,
   },
   { collection: "quizzes" }
 );

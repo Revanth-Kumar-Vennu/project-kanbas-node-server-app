@@ -8,6 +8,7 @@ import AssignmentsRoutes from "./Kanbas/assignments/routes.js";
 import mongoose from "mongoose";
 import UserRoutes from "./Kanbas/users/routes.js";
 import QuizRoutes from "./Kanbas/quizzes/routes.js";
+import QuestionRoutes from "./Kanbas/questions/routes.js";
 import session from "express-session";
 import "dotenv/config";
 const CONNECTION_STRING =
@@ -45,6 +46,7 @@ Hello(app);
 Lab5(app);
 QuizRoutes(app);
 CourseRoutes(app);
+QuestionRoutes(app);
 ModuleRoutes(app);
 AssignmentsRoutes(app);
 UserRoutes(app);
