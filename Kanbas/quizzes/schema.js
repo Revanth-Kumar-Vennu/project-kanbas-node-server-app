@@ -5,9 +5,11 @@ const quizzesSchema = new mongoose.Schema(
         type: String,
         required: true
       },
+      description: {
+        type: String,
+      },
       course: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "courses",
+        type: String,
         required: true,
       },
       quizType: {
@@ -16,16 +18,15 @@ const quizzesSchema = new mongoose.Schema(
       },
       points: {
         type: Number,
-        required: true
       },
-      assignmentGroup: String,
+      assignmentGroup: {
+        type: String,
+        enum: ['Quizzes', 'Assignments', 'Exams', 'Projects']
+      },
       shuffleAnswers: Boolean,
       timeLimit: Number,
       multipleAttempts: Boolean,
-      showCorrectAnswers: {
-        type: String,
-        enum: ['Always', 'Never', 'When correct answers are shown to students']
-      },
+      showCorrectAnswers: Boolean,
       accessCode: String,
       oneQuestionAtATime: Boolean,
       webcamRequired: Boolean,
@@ -35,6 +36,8 @@ const quizzesSchema = new mongoose.Schema(
       untilDate: Date,
       isPublished: Boolean,
       numberOfQuestions: Number,
+      correctAnswersDate: Date,
+      isTimeLimited: Boolean,
   },
   { collection: "quizzes" }
 );
