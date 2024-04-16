@@ -27,9 +27,6 @@ export default function QuestionRoutes(app) {
   });
 
 
-  
-
-
   app.post("/api/quizzes/:qid/questions", async (req, res) => {
    
       const { qid } = req.params;
