@@ -59,7 +59,8 @@ export default function QuestionRoutes(app) {
   app.put("/api/questions/:questionId", async (req, res) => {
     try {
       const { questionId } = req.params;
-      await dao.updateQuestion(questionId, req.body);
+      delete req.body._id;
+      await dao.updateQuestion(questionId, req.body); 
       res.sendStatus(204);
     } catch (error) {
       console.error(error);

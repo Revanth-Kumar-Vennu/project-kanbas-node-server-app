@@ -38,6 +38,11 @@ const quizzesSchema = new mongoose.Schema(
       numberOfQuestions: Number,
       correctAnswersDate: Date,
       isTimeLimited: Boolean,
+      questions: [
+        {
+         type: String,
+        }
+      ],
   },
   { collection: "quizzes" }
 );

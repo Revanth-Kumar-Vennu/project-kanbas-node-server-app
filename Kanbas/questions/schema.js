@@ -4,7 +4,7 @@ const questionSchema = new mongoose.Schema(
   {
     questionTitle: {
       type: String,
-      required: true
+      required: true,
     },
     quizId: {
       type: String,
@@ -12,36 +12,36 @@ const questionSchema = new mongoose.Schema(
     },
     questionType: {
       type: String,
-      enum: ['Multiple Choice', 'True/False', 'Fill in the Blanks'],
-      required: true
+      enum: ["Multiple Choice", "True/False", "Fill In the blank"],
+      required: true,
     },
     points: {
       type: Number,
-      required: true
+      required: true,
     },
-    questionText: String, 
-    choices: [ 
+    questionText: String,
+    choices: [
       {
         text: {
           type: String,
-          required: true
+          required: true,
         },
         isCorrect: {
           type: Boolean,
-          default: false
-        }
-      }
+          default: false,
+        },
+      },
     ],
-    trueFalseAnswer: Boolean, 
+    trueFalseAnswer: Boolean,
     blanks: [String],
     createdAt: {
       type: Date,
-      default: Date.now
+      default: Date.now,
     },
     updatedAt: {
       type: Date,
-      default: Date.now
-    }
+      default: Date.now,
+    },
   },
   { collection: "questions" }
 );
