@@ -2,13 +2,12 @@ import mongoose from "mongoose";
 
 const questionSchema = new mongoose.Schema(
   {
-    question: {
+    questionTitle: {
       type: String,
       required: true
     },
     quizId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "quizzes",
+      type: String,
       required: true,
     },
     questionType: {
