@@ -1,5 +1,5 @@
 import * as dao from "./dao.js";
-// let currentUser = null;
+let currentUser = null;
 export default function UserRoutes(app) {
     const createUser = async (req, res) => {
         const user = await dao.createUser(req.body);
@@ -42,7 +42,8 @@ export default function UserRoutes(app) {
                 { message: "Username already exists" });
             return;
         }
-        const currentUser = await dao.createUser(req.body);
+        // const currentUser = await dao.createUser(req.body);
+        currentUser = await dao.createUser(req.body);
         req.session["currentUser"] = currentUser;
         res.json(currentUser);
     };
@@ -50,10 +51,14 @@ export default function UserRoutes(app) {
     const signin = async (req, res) => {
       console.log(req.body);
         const { username, password } = req.body;
-        const currentUser = await dao.findUserByCredentials(username, password);
+        // const currentUser = await dao.findUserByCredentials(username, password);
+        currentUser = await dao.findUserByCredentials(username, password);
         if (currentUser) {
             req.session["currentUser"] = currentUser;
+            console.log(req.session)
+
             res.json(currentUser);
+            console.log("signin")
             console.log(currentUser);
         } else {
             res.status(401).json({ message: "Invalid username or password" });
@@ -62,21 +67,26 @@ export default function UserRoutes(app) {
 
     const signout = (req, res) => {
         req.session.destroy();
+        currentUser=null;
         res.sendStatus(200);
     };
 
     const profile = async (req, res) => {
-        const currentUser = req.session["currentUser"];
+        console.log("profile")
+        console.log(req.session)
+        // const currentUser = req.session["currentUser"];
+        console.log(currentUser)
+
         if (!currentUser) {
             res.sendStatus(401);
-            return;
+            return ;
         }
 
         res.json(currentUser);
     };
 
     const isAuthenticated = (req, res) => {
-      const currentUser = req.session["currentUser"];
+    //   const currentUser = req.session["currentUser"];
       if (currentUser) {
           res.json(currentUser);
       } else {
